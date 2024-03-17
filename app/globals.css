@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-text-light: #000000;
+  --background-color-light: #ffffff;
+  --border-color-light: #000000;
+
+  --color-text-dark: #ffffff;
+  --background-color-dark: #000000;
+  --border-color-dark: #ffffff;
+}
+
+.light-mode {
+  border-color: var(
+    --border-color-light
+  ); /* Assurez-vous que ceci change la couleur des bordures en noir pour les éléments en mode clair */
+}
+
+.light-mode .border-white {
+  border-color: var(
+    --border-color-light
+  ); /* Spécifique pour les bordures qui sont définies comme blanches par défaut */
+}
+
+body {
+  color: var(--color-text-light);
+  background-color: var(--background-color-light);
+  border-color: var(--border-color-light);
+  /* transition: background-color 0.3s, color 0.3s, border-color 0.3s; */
+}
+
+body.dark {
+  color: var(--color-text-dark);
+  background-color: var(--background-color-dark);
+  border-color: var(--border-color-dark);
+}
+
+body.light {
+  color: var(--color-text-light);
+  background-color: var(--background-color-light);
+  border-color: var(--border-color-light);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.header {
+  transition: transform 0.5s ease-in-out;
+  z-index: 100;
+  /* Assurez-vous que le header n'est pas transparent */
+  background: #fff; /* ou toute autre couleur de fond souhaitée */
+}
+
+.header-scrolled {
+  transform: translateY(-100%);
+}
+
+/* Ajoutez une classe pour gérer l'état où l'élément doit être visible */
+.header-visible {
+  transform: translateY(0%);
+}
+
+/* SWITCH DARK MODE */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 65px;
+  height: 25px; /* Hauteur réduite */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000;
+  transition: 0.6s;
+  border-radius: 25px; /* Rayon de bordure ajusté pour correspondre à la hauteur */
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 17px; /* Hauteur ajustée */
+  width: 18px; /* Largeur ajustée pour garder un aspect circulaire */
+  left: 5px;
+  bottom: 4px; /* Ajustement pour centrer verticalement */
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.slider:after {
+  position: absolute;
+  content: '';
+  height: 19px; /* Hauteur ajustée */
+  width: 19px; /* Largeur ajustée pour garder un aspect circulaire */
+  right: 4px;
+  bottom: 3px; /* Ajustement pour centrer verticalement */
+  background-color: rgb(0, 0, 0);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #ffffff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(34px);
+}
+
+.header-darkmode-gradient {
+  box-shadow: 0 1px 2px rgb(255, 255, 255);
+}
+
+/* CSS */
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  height: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.scroll-container {
+  height: 100vh; /* Utilisez 100vh pour que le conteneur prenne toute la hauteur de la fenêtre */
+  overflow-y: scroll; /* Active le défilement vertical */
+  scroll-snap-type: y mandatory; /* Active le snap sur l'axe des y pour chaque section */
+}
+
+.sec {
+  height: 100vh; /* Chaque section prend la hauteur totale de la fenêtre d'affichage */
+  scroll-snap-align: start; /* Assure que le haut de chaque section s'aligne avec le haut du conteneur lors du snap */
+}
+
+/* Pour Webkit (Chrome, Safari, etc.) */
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Cache la scrollbar sur Webkit */
+}
+
+/* Pour IE, Edge, et Firefox */
+.scroll-container {
+  -ms-overflow-style: none; /* IE et Edge */
+  scrollbar-width: none; /* Firefox */
+}
