@@ -198,7 +198,6 @@ export default function Home() {
                     width={200}
                     height={100}
                     className="rounded-3xl border-2 border-white"
-                    alt="photo"
                   />
                 </div>
                 <div className="flex justify-center">
